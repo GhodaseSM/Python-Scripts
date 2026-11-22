@@ -1,0 +1,10 @@
+Command: '/Users/sharwarighodase/Desktop/S an AI Projects/Python-Scripts/.venv/bin/python3' -m unittest discover -s work/R35-T058 -p test_audio_book.py -v
+Exit code: 0
+
+test_empty_page_input_preserves_state_and_retry_succeeds (test_audio_book.AudioBookFailurePathTests.test_empty_page_input_preserves_state_and_retry_succeeds) ... ok
+test_valid_input_invokes_only_mocked_pdf_and_speech_apis (test_audio_book.AudioBookFailurePathTests.test_valid_input_invokes_only_mocked_pdf_and_speech_apis) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.003s
+
+OK
