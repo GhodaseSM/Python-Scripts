@@ -1,0 +1,11 @@
+{
+  "same_fixture_fresh_isolated_runs": [
+    "/isolated/output/fixture123.mp4",
+    "/isolated/output/fixture123.mp4"
+  ],
+  "after_another_valid_input": {
+    "before_other_input": "/isolated/output/fixture123.mp4",
+    "other_valid_input_result": "/isolated/output/other456.mp4",
+    "fixture_after_other_input": "/isolated/output/fixture123.mp4"
+  }
+}

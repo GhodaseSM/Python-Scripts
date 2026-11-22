@@ -1,0 +1,41 @@
+{
+  "status": "PASSED",
+  "target_module_only": "Video Downloader/VideoDownloader.py",
+  "runner_command": "python3 work/R35-T055/check.py",
+  "native_test_command": "/opt/homebrew/opt/python@3.15/bin/python3.15 -m unittest discover -s 'Video Downloader/tests' -p 'test_*.py'",
+  "nonzero_test_count": 4,
+  "external_io_policy": "pytube/YouTube, input, and the target download are mocked; the runner writes JSON evidence files locally.",
+  "expected_vs_actual": {
+    "same_fixture_fresh_isolated_runs": {
+      "expected": [
+        "/isolated/output/fixture123.mp4",
+        "/isolated/output/fixture123.mp4"
+      ],
+      "actual": [
+        "/isolated/output/fixture123.mp4",
+        "/isolated/output/fixture123.mp4"
+      ],
+      "match": true
+    },
+    "fixture_after_another_valid_input": {
+      "expected": "/isolated/output/fixture123.mp4",
+      "actual": "/isolated/output/fixture123.mp4",
+      "match": true,
+      "intervening_input": "https://www.youtube.com/watch?v=other456",
+      "intervening_expected_actual": {
+        "expected": "/isolated/output/other456.mp4",
+        "actual": "/isolated/output/other456.mp4"
+      }
+    }
+  },
+  "unittest_output": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+  "tool_versions": {
+    "python_version": "3.15.2 (main, Oct 25 2026, 16:57:51) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "python_executable": "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "platform": "macOS-27.2.1-arm64-arm-64bit-Mach-O",
+    "system": "Darwin",
+    "release": "27.2.0",
+    "git_version": "git version 2.50.1 (Apple Git-155)",
+    "test_framework": "unittest (Python standard library; project convention)"
+  }
+}

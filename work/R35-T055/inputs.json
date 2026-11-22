@@ -1,0 +1,67 @@
+{
+  "inspection_before_changes": {
+    "module": "Video Downloader/VideoDownloader.py",
+    "source_snapshot": "from pytube import YouTube\nlink = input(\"Enter the link: \")\nvideo = YouTube(link)\nstream = video.streams.get_highest_resolution()\nstream.download()\n",
+    "public_inputs": [
+      {
+        "name": "link",
+        "source": "interactive stdin via input(\"Enter the link: \")",
+        "meaning": "URL passed to pytube.YouTube"
+      }
+    ],
+    "result": {
+      "user_visible": "No explicit printed result; pytube performs the download.",
+      "download_result": "The return value from stream.download() is ignored by the original script; pytube ordinarily returns the downloaded file path."
+    },
+    "mutation_behavior": [
+      "Importing the original module immediately prompts for input and proceeds with a network-backed download.",
+      "A downloaded video file is written to the current working directory by pytube (unless pytube defaults/configuration alter the destination).",
+      "The source module itself has no explicit persistent state mutation beyond top-level execution and the download side effect."
+    ],
+    "observable_dependencies": {
+      "external_python_package": "pytube (YouTube class)",
+      "network_service": "YouTube, accessed by pytube when resolving streams and downloading",
+      "filesystem": "Current working directory, written by stream.download()",
+      "stdin": "Built-in input() reads the user-provided URL",
+      "project_local_modules": "None"
+    },
+    "test_policy": "Import/invoke only VideoDownloader.py; mock pytube, input, and download/network effects."
+  },
+  "implementation_under_test": {
+    "public_inputs": [
+      {
+        "name": "download_video(link: str)",
+        "source": "Direct Python API call",
+        "meaning": "YouTube URL passed to pytube.YouTube"
+      },
+      {
+        "name": "main()",
+        "source": "Interactive stdin via input(\"Enter the link: \")",
+        "meaning": "Prompts for a URL and delegates to download_video"
+      }
+    ],
+    "result": {
+      "download_video": "Returns the string from the selected stream's download() call (the saved file path).",
+      "main": "Returns None; its user-visible interaction is the URL prompt."
+    },
+    "mutation_behavior": [
+      "Importing the module defines functions only and does not prompt, download, or mutate module-level state.",
+      "Calling download_video downloads the highest-resolution stream and writes a file through pytube; the destination follows pytube's default unless otherwise configured.",
+      "Calling main reads one URL from stdin and triggers the same download side effect."
+    ],
+    "observable_dependencies": {
+      "external_python_package": "pytube, imported as YouTube inside download_video",
+      "network_service": "YouTube, accessed by pytube during stream resolution and download",
+      "filesystem": "The file written by stream.download()",
+      "stdin": "Built-in input() used by main()",
+      "project_local_modules": "None"
+    },
+    "testing_boundary": "The target module is loaded directly by file path; pytube/YouTube, input, and stream.download are mocked so tests make no network access or video-file writes. The runner writes its JSON evidence locally."
+  },
+  "test_fixture": {
+    "valid_url": "https://www.youtube.com/watch?v=fixture123",
+    "expected_download_result": "/isolated/output/fixture123.mp4",
+    "other_valid_url": "https://www.youtube.com/watch?v=other456",
+    "other_expected_download_result": "/isolated/output/other456.mp4"
+  }
+}
