@@ -1,6 +1,0 @@
-{
-  "command": "/opt/homebrew/opt/python@3.15/bin/python3.15 -m unittest discover -s work/R35-T059 -p 'test_*.py' -v",
-  "exit_code": 0,
-  "tests_run": 3,
-  "output": "test_default_preserves_original_102_circle_art (test_art2.TestTurtleArt.test_default_preserves_original_102_circle_art) ... ok\ntest_scaled_sizes_have_expected_draws_and_mutation (test_art2.TestTurtleArt.test_scaled_sizes_have_expected_draws_and_mutation) ... ok\ntest_zero_iterations_has_no_draws_or_color_mutation (test_art2.TestTurtleArt.test_zero_iterations_has_no_draws_or_color_mutation) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.004s\n\nOK\n"
-}
