@@ -1,0 +1,32 @@
+{
+  "reviewed_before_change": {
+    "base_commit": "a0e6e54",
+    "source_blob": "f2406d8ea240ef3437da8990f57246f2b2e66cd3",
+    "public_function": "canny_edge_detection(frame)",
+    "input": "One OpenCV-compatible BGR image; no explicit validation or defaults.",
+    "result": "The array returned by cv2.Canny, normally a single-channel uint8 edge image with the frame's height and width.",
+    "mutation": "Does not assign into or otherwise intentionally mutate frame; conversion, blur, and Canny create intermediate/result arrays.",
+    "dependencies": {
+      "function_direct": [
+        "cv2.cvtColor",
+        "cv2.GaussianBlur",
+        "cv2.Canny"
+      ],
+      "module_imports": [
+        "cv2",
+        "numpy (used by other functions in the module)"
+      ],
+      "video_demo_io": "cv2.VideoCapture/imshow/waitKey/release/destroyAllWindows; moved under main() and mocked by the focused check."
+    }
+  },
+  "test_fixture": {
+    "input": "5x5 image where every BGR pixel is [0, 255, 0]",
+    "expected_grayscale_pixel": 150,
+    "expected_blur": "5x5 matrix of 150 (uniform input)",
+    "expected_canny_edges": "5x5 matrix of 0 (uniform input has no gradients)",
+    "method": "Hand-calculate each intermediate state, inject those states at the cv2 boundary, then compare against function locals captured by sys.settrace.",
+    "scope_limit": "cv2 and numpy are stubbed because they are not installed in the selected workspace environment; this verifies API wiring and mutation/return behavior, not OpenCV's native algorithms."
+  },
+  "test_framework": "Python standard-library unittest; the repository has no pytest.ini, pyproject.toml, tox.ini, or setup.cfg test configuration.",
+  "external_io": "Video capture and display calls are mocked; no video file, camera, or GUI is opened."
+}
